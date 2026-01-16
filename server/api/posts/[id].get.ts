@@ -38,7 +38,7 @@ const posts: Post[] = [
 
 简约不简单。
     `,
-    coverImage: 'https://images.unsplash.com/photo-1499750310159-5b5f22693851?q=80&w=2000&auto=format&fit=crop',
+    coverImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2000&auto=format&fit=crop',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     category: { id: '1', name: '前端开发', slug: 'frontend' },

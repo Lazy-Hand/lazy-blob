@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { getRandomGradient } from '../../lib/colors'
+
 const tags = [
   { name: 'Nuxt', count: 15 },
   { name: 'Vue', count: 12 },
@@ -28,16 +30,17 @@ const tags = [
         v-for="tag in tags"
         :key="tag.name"
         to="/tags"
-        class="group flex items-center gap-2 rounded-full border bg-card px-4 py-2 text-sm shadow-sm transition-colors hover:border-primary/50 hover:bg-primary/5"
+        class="group flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm shadow-sm transition-opacity hover:opacity-90 text-white"
+        :style="{ background: getRandomGradient() }"
       >
         <span
-          class="i-lucide-tag text-muted-foreground group-hover:text-primary transition-colors"
+          class="i-lucide-tag text-white/80"
         />
-        <span class="font-medium group-hover:text-primary transition-colors">{{
+        <span class="font-medium">{{
           tag.name
         }}</span>
         <span
-          class="ml-1 text-xs text-muted-foreground bg-muted px-1.5 py-0.5 rounded-full"
+          class="ml-1 text-xs text-white/90 bg-white/20 px-1.5 py-0.5 rounded-full"
         >{{ tag.count }}</span>
       </NuxtLink>
     </div>

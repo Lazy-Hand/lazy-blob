@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { Photo } from "~/types/photo";
-import type { ApiResponse, PaginatedResponse } from "~/types";
+import type { Photo } from "../../types/photo";
+import type { ApiResponse, PaginatedResponse } from "../../types";
 
 // State
 const photos = ref<Photo[]>([]);
@@ -50,8 +50,8 @@ await fetchPhotos();
 // Infinite scroll using Intersection Observer
 useIntersectionObserver(
   loadMoreTrigger,
-  ([{ isIntersecting }]) => {
-    if (isIntersecting && hasMore.value && !pending.value) {
+  ([entity]) => {
+    if (entity?.isIntersecting && hasMore.value && !pending.value) {
       fetchPhotos();
     }
   },

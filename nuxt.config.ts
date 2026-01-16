@@ -1,4 +1,10 @@
+// @ts-expect-error: url module is available in node
+import { fileURLToPath } from 'url'
+
 export default defineNuxtConfig({
+  alias: {
+    '~/types': fileURLToPath(new URL('./types', import.meta.url))
+  },
   modules: [
     '@nuxt/eslint',
     '@nuxt/ui',
@@ -7,6 +13,12 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxt/fonts'
   ],
+
+  runtimeConfig: {
+    public: {
+      apiBase: 'http://localhost:8080'
+    }
+  },
 
   app: {
     head: {

@@ -1,22 +1,33 @@
 <script setup lang="ts">
+import type { Post, Pagination } from '~/types'
+
 const route = useRoute()
 const page = computed(() => Number(route.query.page) || 1)
-const { fetchPosts } = useBlogApi()
+const category = computed(() => route.query.category as string | undefined)
+const { fetchPosts, fetchCategories } = useBlogApi()
 
-// Watch page changes and refetch
-const { data: posts, pending, pagination } = await fetchPosts(page.value)
+const { data: categories } = await fetchCategories()
+const posts = ref<Post[]>([])
+const pagination = ref<Pagination>()
+const pending = ref(false)
 
-watch(page, async (newPage) => {
-  const { data: newPosts, pagination: newPagination } = await fetchPosts(
-    newPage
-  )
-  posts.value = newPosts.value
-  pagination.value = newPagination.value
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-})
+const loadPosts = async () => {
+  pending.value = true
+  try {
+    const { data, pagination: pag } = await fetchPosts(page.value, 6, category.value)
+    if (data.value) posts.value = data.value
+    if (pag.value) pagination.value = pag.value
+  } finally {
+    pending.value = false
+  }
+}
+
+await loadPosts()
+
+watch([page, category], loadPosts)
 
 useHead({
-  title: '文章列表'
+  title: category.value ? `文章列表 - ${category.value}` : '文章列表'
 })
 </script>
 
@@ -29,6 +40,29 @@ useHead({
       <p class="text-lg text-muted-foreground">
         Discover stories, thinking, and expertise from writers on any topic.
       </p>
+
+      <!-- Category Tabs -->
+      <div class="mt-8 flex flex-wrap justify-center gap-2">
+        <Button
+          :variant="!category ? 'default' : 'outline'"
+          size="sm"
+          class="rounded-full"
+          @click="navigateTo('/posts')"
+        >
+          全部
+        </Button>
+        <Button
+          v-for="cat in categories"
+          :key="cat.id"
+          :variant="category === cat.slug ? 'default' : 'outline'"
+          size="sm"
+          class="rounded-full"
+          @click="navigateTo({ query: { category: cat.slug } })"
+        >
+          {{ cat.name }}
+          <span class="ml-1 text-xs opacity-70">({{ cat.count || 0 }})</span>
+        </Button>
+      </div>
     </header>
 
     <!-- Post Grid -->
@@ -65,7 +99,7 @@ useHead({
         :disabled="page <= 1"
         @click="navigateTo({ query: { ...route.query, page: page - 1 } })"
       >
-        Previous
+        上一页
       </Button>
 
       <div class="flex items-center gap-2">
@@ -85,7 +119,7 @@ useHead({
         :disabled="page >= pagination.totalPages"
         @click="navigateTo({ query: { ...route.query, page: page + 1 } })"
       >
-        Next
+        下一页
       </Button>
     </div>
   </div>

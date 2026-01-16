@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { getRandomGradient } from '../../lib/colors'
+
 // Mock data for sidebar
 const categories = [
   { name: '前端开发', count: 12 },
@@ -83,7 +85,8 @@ const tags = ['Nuxt', 'Vue', 'NestJS', 'TypeScript', 'Tailwind']
           v-for="tag in tags"
           :key="tag"
           to="/tags"
-          class="text-xs px-2.5 py-1 rounded-md bg-muted text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors"
+          class="text-xs px-2.5 py-1 rounded-md text-white transition-opacity hover:opacity-90 shadow-sm"
+          :style="{ background: getRandomGradient() }"
         >
           {{ tag }}
         </NuxtLink>

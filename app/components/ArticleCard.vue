@@ -58,7 +58,7 @@ defineProps<{
         >
           <Badge
             variant="secondary"
-            class="text-xs font-normal"
+            class="text-xs font-normal text-white"
           >
             #{{ tag.name }}
           </Badge>

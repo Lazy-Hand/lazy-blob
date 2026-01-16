@@ -1,12 +1,12 @@
-import type { Post, ApiResponse, PaginatedResponse } from '~/types'
+import type { Post, Category, ApiResponse, PaginatedResponse } from '~/types'
 
 export const useBlogApi = () => {
-  const fetchPosts = async (page = 1, limit = 6) => {
+  const fetchPosts = async (page = 1, limit = 6, category?: string) => {
     const { data, error, pending, refresh } = await useFetch<
       ApiResponse<PaginatedResponse<Post>>
     >('/api/posts', {
-      query: { page, limit },
-      watch: [ref(page)]
+      query: { page, limit, category },
+      watch: [ref(page), ref(category)]
     })
 
     return {
@@ -29,8 +29,20 @@ export const useBlogApi = () => {
     }
   }
 
+  const fetchCategories = async () => {
+    const { data, error, pending } = await useFetch<ApiResponse<Category[]>>(
+      '/api/categories'
+    )
+    return {
+      data: computed(() => data.value?.data || []),
+      error,
+      pending
+    }
+  }
+
   return {
     fetchPosts,
-    fetchPostById
+    fetchPostById,
+    fetchCategories
   }
 }

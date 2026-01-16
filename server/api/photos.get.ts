@@ -40,7 +40,7 @@ const mockPhotos: Photo[] = Array.from({ length: 50 }).map((_, i) => ({
     'New York, USA',
     'Amazon Rainforest',
     'Nile River'
-  ][i % 10],
+  ][i % 10] as string,
   date: new Date(Date.now() - i * 86400000).toISOString(),
   width: [600, 800, 500, 700][i % 4],
   height: [800, 600, 700, 500][i % 4]
