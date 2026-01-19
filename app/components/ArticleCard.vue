@@ -12,11 +12,10 @@ defineProps<{
   >
     <!-- Cover Image -->
     <div
-      v-if="post.coverImage"
       class="aspect-video w-full overflow-hidden bg-muted"
     >
       <NuxtImg
-        :src="post.coverImage"
+        :src="post.coverImage || '/images/default-posts.avif'"
         :alt="post.title"
         class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         loading="lazy"

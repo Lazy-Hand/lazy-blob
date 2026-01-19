@@ -15,13 +15,28 @@ const loadPosts = async () => {
   pending.value = true
   try {
     const { data, pagination: pag } = await fetchPosts(page.value, 6, category.value)
-    if (data.value) posts.value = data.value
+    if (data.value) {
+      posts.value = data.value
+    } else {
+      posts.value = []
+    }
     if (pag.value) pagination.value = pag.value
+  } catch (e) {
+    console.error('Load posts failed', e)
+    posts.value = []
   } finally {
     pending.value = false
   }
 }
 
+// Ensure initial load happens even if category is undefined
+onMounted(() => {
+  if (posts.value.length === 0) {
+    loadPosts()
+  }
+})
+
+// Server-side prefetch
 await loadPosts()
 
 watch([page, category], loadPosts)
