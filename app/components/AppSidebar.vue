@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { getRandomGradient } from '../../lib/colors'
+import { getGradientForTag } from '../../lib/colors'
+const { t } = useI18n()
 
 // Mock data for sidebar
 const categories = [
@@ -24,15 +25,15 @@ const tags = ['Nuxt', 'Vue', 'NestJS', 'TypeScript', 'Tailwind']
         </div>
         <div>
           <h3 class="font-semibold">
-            Boke Author
+            {{ t('sidebar.author') }}
           </h3>
           <p class="text-xs text-muted-foreground">
-            Full Stack Developer
+            {{ t('sidebar.role') }}
           </p>
         </div>
       </div>
       <p class="text-sm text-muted-foreground mb-4">
-        专注于分享 Web 技术、架构设计与编程心得。
+        {{ t('sidebar.bio') }}
       </p>
       <div class="grid grid-cols-2 gap-2">
         <Button
@@ -40,14 +41,14 @@ const tags = ['Nuxt', 'Vue', 'NestJS', 'TypeScript', 'Tailwind']
           variant="outline"
           class="w-full"
         >
-          Github
+          {{ t('sidebar.github') }}
         </Button>
         <Button
           size="sm"
           variant="outline"
           class="w-full"
         >
-          Twitter
+          {{ t('sidebar.twitter') }}
         </Button>
       </div>
     </div>
@@ -55,7 +56,7 @@ const tags = ['Nuxt', 'Vue', 'NestJS', 'TypeScript', 'Tailwind']
     <!-- Categories -->
     <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
       <h3 class="font-semibold mb-4 flex items-center gap-2">
-        <span class="i-lucide-folder text-primary" /> 分类
+        <span class="i-lucide-folder text-primary" /> {{ t('sidebar.categories') }}
       </h3>
       <ul class="space-y-2">
         <li
@@ -78,7 +79,7 @@ const tags = ['Nuxt', 'Vue', 'NestJS', 'TypeScript', 'Tailwind']
     <!-- Tags -->
     <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
       <h3 class="font-semibold mb-4 flex items-center gap-2">
-        <span class="i-lucide-tag text-primary" /> 标签
+        <span class="i-lucide-tag text-primary" /> {{ t('sidebar.tags') }}
       </h3>
       <div class="flex flex-wrap gap-2">
         <NuxtLink
@@ -86,7 +87,7 @@ const tags = ['Nuxt', 'Vue', 'NestJS', 'TypeScript', 'Tailwind']
           :key="tag"
           to="/tags"
           class="text-xs px-2.5 py-1 rounded-md text-white transition-opacity hover:opacity-90 shadow-sm"
-          :style="{ background: getRandomGradient() }"
+          :style="{ background: getGradientForTag(tag) }"
         >
           {{ tag }}
         </NuxtLink>

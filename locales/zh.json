@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "首页",
+    "posts": "文章",
+    "treehole": "树洞",
+    "photography": "摄影",
+    "colors": "色彩",
+    "friends": "友链",
+    "categories": "分类",
+    "archives": "归档",
+    "about": "关于"
+  },
+  "auth": {
+    "login": "登录",
+    "logout": "退出登录",
+    "username": "用户名",
+    "password": "密码",
+    "loginTitle": "欢迎回来",
+    "loginSubtitle": "登录您的账户",
+    "loginButton": "登录",
+    "loginButtonLoading": "登录中...",
+    "loginError": "登录失败，请检查用户名和密码",
+    "loginNoToken": "登录失败，未收到访问令牌",
+    "loginNetworkError": "登录失败，请稍后重试",
+    "usernameRequired": "请输入用户名和密码"
+  },
+  "profile": {
+    "title": "个人中心",
+    "subtitle": "管理您的个人信息",
+    "editProfile": "编辑资料",
+    "save": "保存",
+    "cancel": "取消",
+    "logout": "退出登录",
+    "basicInfo": "基本信息",
+    "accountActions": "账户操作",
+    "username": "用户名",
+    "nickname": "昵称",
+    "email": "邮箱",
+    "mobile": "手机号",
+    "gender": "性别",
+    "status": "状态",
+    "statusNormal": "正常",
+    "statusDisabled": "禁用",
+    "genderUnknown": "未知",
+    "genderMale": "男",
+    "genderFemale": "女",
+    "mobileNotSet": "未设置"
+  },
+  "user": {
+    "profile": "个人中心",
+    "profileLink": "个人中心",
+    "logout": "退出登录"
+  },
+  "home": {
+    "thinking": "思考",
+    "sharing": "分享",
+    "subtitle": "一个分享前端开发、设计系统和软件架构想法的简约空间。"
+  },
+  "sidebar": {
+    "author": "Boke Author",
+    "role": "Full Stack Developer",
+    "bio": "专注于分享 Web 技术、架构设计与编程心得。",
+    "github": "Github",
+    "twitter": "Twitter",
+    "categories": "分类",
+    "tags": "标签"
+  }
+}

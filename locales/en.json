@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Home",
+    "posts": "Posts",
+    "treehole": "Treehole",
+    "photography": "Photography",
+    "colors": "Colors",
+    "friends": "Friends",
+    "categories": "Categories",
+    "archives": "Archives",
+    "about": "About"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "username": "Username",
+    "password": "Password",
+    "loginTitle": "Welcome Back",
+    "loginSubtitle": "Sign in to your account",
+    "loginButton": "Sign In",
+    "loginButtonLoading": "Signing in...",
+    "loginError": "Login failed, please check your username and password",
+    "loginNoToken": "Login failed, no access token received",
+    "loginNetworkError": "Login failed, please try again later",
+    "usernameRequired": "Please enter username and password"
+  },
+  "profile": {
+    "title": "Profile",
+    "subtitle": "Manage your personal information",
+    "editProfile": "Edit Profile",
+    "save": "Save",
+    "cancel": "Cancel",
+    "logout": "Logout",
+    "basicInfo": "Basic Information",
+    "accountActions": "Account Actions",
+    "username": "Username",
+    "nickname": "Nickname",
+    "email": "Email",
+    "mobile": "Mobile",
+    "gender": "Gender",
+    "status": "Status",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled",
+    "genderUnknown": "Unknown",
+    "genderMale": "Male",
+    "genderFemale": "Female",
+    "mobileNotSet": "Not set"
+  },
+  "user": {
+    "profile": "Profile",
+    "profileLink": "Personal Center",
+    "logout": "Logout"
+  },
+  "home": {
+    "thinking": "Thinking",
+    "sharing": "Sharing",
+    "subtitle": "A minimalist space for sharing thoughts on frontend development, design systems, and software architecture."
+  },
+  "sidebar": {
+    "author": "Boke Author",
+    "role": "Full Stack Developer",
+    "bio": "Focus on sharing web technology, architecture design and programming insights.",
+    "github": "Github",
+    "twitter": "Twitter",
+    "categories": "Categories",
+    "tags": "Tags"
+  }
+}

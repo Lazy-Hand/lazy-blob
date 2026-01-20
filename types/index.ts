@@ -19,6 +19,18 @@ export interface User {
   bio?: string
 }
 
+export interface UserEntity {
+  userId: string
+  username: string
+  nickname: string
+  avatar: string
+  email: string
+  mobile: string
+  status: string
+  gender: string
+  isBlog: string
+}
+
 export interface Post {
   id: string
   title: string
@@ -49,5 +61,24 @@ export interface PaginatedResponse<T> {
 export interface ApiResponse<T> {
   code: number
   message: string
+  data: T
+}
+
+export interface LoginDto {
+  username: string
+  password: string
+}
+
+export interface LoginResult {
+  accessToken: string
+}
+
+export interface ApiResult {
+  code: number
+  msg: string
+  success: boolean
+}
+
+export interface ApiResultWithData<T> extends ApiResult {
   data: T
 }

@@ -11,7 +11,8 @@ export default defineNuxtConfig({
     'shadcn-nuxt',
     '@nuxt/image',
     '@vueuse/nuxt',
-    '@nuxt/fonts'
+    '@nuxt/fonts',
+    '@nuxtjs/i18n'
   ],
 
   runtimeConfig: {
@@ -50,5 +51,24 @@ export default defineNuxtConfig({
   shadcn: {
     prefix: '',
     componentDir: './app/components/ui'
+  },
+
+  i18n: {
+    locales: [
+      {
+        code: 'zh',
+        iso: 'zh-CN',
+        file: 'zh.json',
+        name: '简体中文'
+      },
+      {
+        code: 'en',
+        iso: 'en-US',
+        file: 'en.json',
+        name: 'English'
+      }
+    ],
+    defaultLocale: 'zh',
+    strategy: 'prefix_except_default'
   }
 })

@@ -411,3 +411,12 @@ export const getRandomGradient = () => {
   const randomSet = randomCollection.sets[Math.floor(Math.random() * randomCollection.sets.length)]!;
   return `linear-gradient(to right, ${randomSet.colors[0]?.name}, ${randomSet.colors[1]?.name})`;
 };
+
+export const getGradientForTag = (tag: string) => {
+  const hash = tag.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const collectionIndex = hash % colorCollections.length;
+  const collection = colorCollections[collectionIndex]!;
+  const setIndex = hash % collection.sets.length;
+  const set = collection.sets[setIndex]!;
+  return `linear-gradient(to right, ${set.colors[0]?.name}, ${set.colors[1]?.name})`;
+};

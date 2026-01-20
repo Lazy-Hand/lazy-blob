@@ -1,15 +1,29 @@
 <script setup lang="ts">
-const items = [
-  { label: '首页', to: '/' },
-  { label: '文章', to: '/posts' },
-  { label: '树洞', to: '/treehole' },
-  { label: '摄影', to: '/photography' },
-  { label: '色彩', to: '/colors' },
-  { label: '友链', to: '/friends' },
-  { label: '分类', to: '/categories' },
-  { label: '归档', to: '/archives' },
-  { label: '关于', to: '/about' }
-]
+const { isAuthenticated } = useAuth()
+const { t, locale } = useI18n()
+const localePath = useLocalePath()
+
+const items = computed(() => [
+  { label: t('nav.home'), to: localePath('/') },
+  { label: t('nav.posts'), to: localePath('/posts') },
+  { label: t('nav.treehole'), to: localePath('/treehole') },
+  { label: t('nav.photography'), to: localePath('/photography') },
+  { label: t('nav.colors'), to: localePath('/colors') },
+  { label: t('nav.friends'), to: localePath('/friends') },
+  { label: t('nav.categories'), to: localePath('/categories') },
+  { label: t('nav.archives'), to: localePath('/archives') },
+  { label: t('nav.about'), to: localePath('/about') }
+])
+
+const isLinkActive = (to: string) => {
+  const route = useRoute()
+  const currentPath = route.path
+
+  // Use localePath to normalize the comparison
+  const normalizedTo = localePath(to)
+
+  return currentPath === normalizedTo
+}
 </script>
 
 <template>
@@ -21,7 +35,7 @@ const items = [
     >
       <div class="flex items-center gap-6">
         <NuxtLink
-          to="/"
+          :to="localePath('/')"
           class="block h-16 w-auto text-foreground"
         >
           <AppLogo class="h-full w-auto" />
@@ -32,7 +46,7 @@ const items = [
             :key="item.to"
             :to="item.to"
             class="text-sm font-medium transition-colors hover:text-primary"
-            active-class="text-primary"
+            :class="{ 'text-primary': isLinkActive(item.to) }"
           >
             {{ item.label }}
           </NuxtLink>
@@ -40,14 +54,18 @@ const items = [
       </div>
 
       <div class="flex items-center gap-4">
-        <!-- Mobile Menu (Placeholder) -->
-        <Button
-          variant="ghost"
-          size="icon"
-          class="md:hidden"
+        <LanguageSwitcher />
+
+        <NuxtLink
+          v-if="!isAuthenticated"
+          :to="localePath('/login')"
+          class="text-sm font-medium transition-colors hover:text-primary"
+          :class="{ 'text-primary': isLinkActive(localePath('/login')) }"
         >
-          <span class="i-lucide-menu text-xl" />
-        </Button>
+          {{ t('auth.login') }}
+        </NuxtLink>
+        <UserDropdown v-else />
+
         <ColorModeButton />
       </div>
     </div>

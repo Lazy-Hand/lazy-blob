@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { fetchPosts } = useBlogApi()
+const { t } = useI18n()
 const { data: posts, pending } = await fetchPosts()
 </script>
 
@@ -8,11 +9,10 @@ const { data: posts, pending } = await fetchPosts()
     <!-- Hero / Intro -->
     <section class="mb-12 py-8 text-center sm:text-left">
       <h1 class="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
-        Thinking & <span class="text-primary">Sharing</span>
+        {{ t('home.thinking') }} & <span class="text-primary">{{ t('home.sharing') }}</span>
       </h1>
       <p class="text-lg text-muted-foreground max-w-2xl">
-        A minimalist space for sharing thoughts on frontend development, design
-        systems, and software architecture.
+        {{ t('home.subtitle') }}
       </p>
     </section>
 

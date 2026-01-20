@@ -9,13 +9,29 @@ export const useHttp = <T>(url: string | (() => string), options: UseFetchOption
     onRequest(ctx: any) {
       ctx.options.headers = ctx.options.headers || {}
 
-      // Default headers
+      const token = useCookie('accessToken')
+
+      if (token.value) {
+        if (Array.isArray(ctx.options.headers)) {
+          ctx.options.headers.push(['Authorization', `Bearer ${token.value}`])
+        } else if (ctx.options.headers instanceof Headers) {
+          ctx.options.headers.set('Authorization', `Bearer ${token.value}`)
+        } else {
+          ctx.options.headers['Authorization'] = `Bearer ${token.value}`
+        }
+      }
+
       if (Array.isArray(ctx.options.headers)) {
         ctx.options.headers.push(['X-Client-Source', 'blob'])
       } else if (ctx.options.headers instanceof Headers) {
         ctx.options.headers.set('X-Client-Source', 'blob')
       } else {
         ctx.options.headers['X-Client-Source'] = 'blob'
+      }
+
+      if (!ctx.options.method || ctx.options.method.toUpperCase() === 'GET') {
+        ctx.options.query = ctx.options.query || {}
+        ctx.options.query._t = Date.now()
       }
 
       if (options.onRequest) {

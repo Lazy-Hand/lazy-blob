@@ -4,6 +4,15 @@ import type { Post } from '~/types'
 defineProps<{
   post: Post
 }>()
+
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString)
+  return new Intl.DateTimeFormat('zh-CN', {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric'
+  }).format(date)
+}
 </script>
 
 <template>
@@ -31,7 +40,7 @@ defineProps<{
           }}</span>
           <span>•</span>
           <time :datetime="post.createdAt">{{
-            new Date(post.createdAt).toLocaleDateString()
+            formatDate(post.createdAt)
           }}</time>
         </div>
 
